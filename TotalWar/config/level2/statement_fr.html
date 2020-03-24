@@ -1,0 +1,115 @@
+<div id="statement_back" class="statement_back" style="display:none"></div>  <div class="statement-body">
+    <!-- LEAGUE ALERT -->
+    <div style="color: #7cc576;
+        background-color: rgba(124, 197, 118,.1);
+        padding: 20px;
+        margin-right: 15px;
+        margin-left: 15px;
+        margin-bottom: 10px;
+        text-align: left;">
+        <div style="text-align: center; margin-bottom: 6px">
+            <img src="//cdn.codingame.com/smash-the-code/statement/league_wood_04.png"  alt=""/>
+        </div>
+        <p style="text-align: center; font-weight: 700; margin-bottom: 6px;">
+            This is a <b>league based</b> challenge.
+        </p>
+        <span class="statement-league-alert-content">
+            For this challenge, multiple versions of the same game are available. Once you have proven your skills on this first version, you will access a higher league and extra rules will be unlocked.
+          </span>
+    </div>
+    <!-- GOAL -->
+    <div class="statement-section statement-goal">
+        <h2>
+            <span class="icon icon-goal">&nbsp;</span>
+            <span>The Goal</span>
+        </h2>
+        <div class="statement-goal-content">
+            To win the match, you will have to manage your troops to defeat all the enemy soldiers.<br>
+        </div>
+    </div>
+    <!-- RULES -->
+    <div class="statement-section statement-rules">
+        <h2>
+            <span class="icon icon-rules">&nbsp;</span>
+            <span>Rules</span>
+        </h2>
+        <div><div class="statement-rules-content"><p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">This is a 1 vs 1 game, when both players have the same amount of units and they have to use strategy to defeat the other player destroying all his/her units.</span></p>
+            <p>
+                <br>
+            </p>
+            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">In each turn, the player could send one troop to the position that his/her wants, to do this you will have to indicate the unit <var>id</var>, how many points it would move in the <var>x axis</var> and how many points it would move in the <var>y axis</var>.&nbsp;</span></p>
+            <p>
+                <br>
+            </p>
+            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">All the units have four states (adding one more to the archers), they are the idle position (when they aren’t doing anything), moving, fighting and death (when the unit has been destroyed), the archer have the fire position, when they are attacking to other units with their bows.</span></p>
+            <p>
+                <br>
+            </p>
+            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">The units have a direction too, this is what direction are they looking at, this are <var>NORTHWEST</var> (0), <var>NORTH</var> (1), <var>NORTHEAST</var> (2), <var>EAST</var> (3), <var>SOUTHEAST</var> (4), <var>SOUTH</var> (5), <var>SOUTHWEST</var> (6) and <var>WEST</var> (7).</span></p>
+            <p>
+                <br>
+            </p>
+            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">There are four types of units, these are soldiers with swords, spearmans, archers and cavalry. This follows a “Rock paper scissors” scheme, where the sword beats the spear, the spear beats the horse and the horse beats the sword. The archer can attack at units that are at a distance less than 200 points from their position, but are very weak at hand-to-hand combat.</span></p>
+            <p>
+                <br>
+            </p>
+            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">The game is divided into three leagues, adding complexity when the leagues advance, each leagues has more units in each side that the last one. The first league will have four units: a swordsman, a spearman, an archer and a cavalry; the second one will have nine units, which uses a draft system, where each player will select one unit each turn until there are nine units on each side of the map (how it works it will be explained later); and the third one will have thirty units on each side with a draft system, but it adds the general units, this units are a bit stronger than the other ones and can change the ally units stats depending of his status and position (it will be explained later).</span></p>
+            <p>
+                <br>
+            </p>
+            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">The draft is a troops selector, where you can choose between the four types of troops and you can indicate where you want to put your different type of units selecting their initial x and y position (for example “2(id) 200(x) 500(y)”). The selector is:</span></p>
+            <p>
+                <br>
+            </p>
+            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">1. Soldiers with swords.</span></p>
+            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">2. Soldiers with spears.</span></p>
+            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">3. Cavalry.</span></p>
+            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">4. Archers.</span></p>
+            <p>
+                <br>
+            </p>
+            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">The general is a special unit that (in the third league) always would be the unit that has id 1 in your army. This unit have an amount of 1.25 in his stats permanently and increment all the ally units stats that are near to him, but if the general dies, all your units would receive a stats penalization that would decrease their stats in 0.75. All the stats can change, except for the life one, that it isn’t affected by these changes.</span></p>
+            <p>
+                <br>
+            </p>
+            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">There are different types of stats, and each unit has different amount of them, the stats are: life, defense, attack, charge resistance, charge force, speed and resistance from far attacks, in addition, the archers have two more stats, these ones are how far they can throw arrows and how damage they do with these arrows.</span></p>
+            <p>
+                <br>
+            </p>
+            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">The game finish when one army is completely destroy or when 400 turns finish, in these last case, the winner would be the player who has more units alive at that moment, being a draw if both players have the same amount of units.</span></p>
+        </div>
+        </div>
+        <!-- PROTOCOL -->
+        <div class="statement-section statement-protocol">
+            <h2>
+                <span class="icon icon-protocol">&nbsp;</span>
+                <span>Game Input</span>
+            </h2>
+            <!-- Protocol block -->
+            <div class="blk">
+                <div class="title">Input for one game turn</div>
+                <div class="text"><span class="statement-lineno">First input:</span> 1 integer <var>numberUnits</var> (how many troops are on each side at the beginning).<br>
+                    <span class="statement-lineno">Second input:</span> 1 integer <var>allyUnitId</var>.<br>
+                    <span class="statement-lineno">Third input:</span> 1 integer <var>allyUnitPosX</var>.<br>
+                    <span class="statement-lineno">Fourth input:</span> 1 integer <var>allyUnitPosY</var>.<br>
+                    <span class="statement-lineno">Fifth input:</span> 1 integer <var>allyUnitDirection</var>.<br>
+                    <span class="statement-lineno">Sixth input:</span> 1 integer <var>allyUnitLife</var>.<br>
+                    <span class="statement-lineno">Seventh input:</span> 1 integer <var>allyUnitType</var>.<br>
+                    <span class="statement-lineno">Eight input:</span> 1 integer <var>enemyUnitId</var>.<br>
+                    <span class="statement-lineno">Nineth input:</span> 1 integer <var>enemyUnitPosX</var>.<br>
+                    <span class="statement-lineno">Tenth input:</span> 1 integer <var>enemyUnitPosY</var>.<br>
+                    <span class="statement-lineno">Eleventh input:</span> 1 integer <var>enemyUnitDirection</var>.<br>
+                    <span class="statement-lineno">Twelfth input:</span> 1 integer <var>enemyUnitLife</var>.<br>
+                    <span class="statement-lineno">Thirteenth input:</span> 1 integer <var>enemyUnitType</var>.<br>
+                </div>
+
+                <!-- Protocol block -->
+                <div class="blk">
+                    <div class="title">Output for one game turn</div>
+                    <div class="text"><span class="statement-lineno">Line 1:</span> 3 space separated integers <var>id</var>, <var>movement in X axis</var> and <var>movement in Y axis</var>.
+                        <p>You can send more than one order (without limit) in one turn separating them with ";", for example "2 0 300 ; 4 100 0".</p>
+                        <p>If you don't want to move any troops, the first integer should be 0, for example "0 0 0" or "0 200 50".</p></div>
+                </div>
+            </div>
+        </div>
+    </div> </div>

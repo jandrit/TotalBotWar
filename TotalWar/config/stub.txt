@@ -1,0 +1,16 @@
+read numberUnits:int
+gameloop
+loop numberUnits read allyUnitId:int allyUnitPosX:int allyUnitPosY:int allyUnitDirection:int allyUnitLife:int allyUnitType:int allyUnitMoving:int allyUnitFinalXPosition:int allyUnitFinalYPosition:int
+loop numberUnits read enemyUnitId:int enemyUnitPosX:int enemyUnitPosY:int enemyUnitDirection:int enemyUnitLife:int enemyUnitType:int allyUnitMoving:int
+write 0 0 0
+
+STATEMENT
+Defeat all the enemy troops
+
+INPUT
+numberUnits: How many troops are on each side.
+allyUnit: Different information about one unit of your troops.
+enemyUnit: Different information about one unit of your enemy army.
+
+OUTPUT
+<number> <number> <number>
