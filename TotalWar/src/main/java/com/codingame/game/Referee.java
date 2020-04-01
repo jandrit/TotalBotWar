@@ -80,11 +80,25 @@ public class Referee extends AbstractReferee {
     }
 
     private void drawBackground() { //Dibuja los fondos y el logo del juego
-        graphicEntityModule.createSprite()
-                .setImage("Background.png")
-                .setBaseHeight(1080)
-                .setBaseWidth(1920)
-                .setAnchor(0);
+        if (gameManager.getLeagueLevel() == 1) {
+            graphicEntityModule.createSprite()
+                    .setImage("Fondo1.jpg")
+                    .setBaseHeight(1080)
+                    .setBaseWidth(1920)
+                    .setAnchor(0);
+        } else if (gameManager.getLeagueLevel() == 2) {
+            graphicEntityModule.createSprite()
+                    .setImage("Fondo2.jpg")
+                    .setBaseHeight(1080)
+                    .setBaseWidth(1920)
+                    .setAnchor(0);
+        } else {
+            graphicEntityModule.createSprite()
+                    .setImage("Background.png")
+                    .setBaseHeight(1080)
+                    .setBaseWidth(1920)
+                    .setAnchor(0);
+        }
 
         graphicEntityModule.createSprite()
                 .setImage("TotalBotWar.png")
@@ -1550,6 +1564,8 @@ public class Referee extends AbstractReferee {
                     else
                         moving = 0;
 
+                    //System.out.println("Id: " + player1Unit.getId() + " Objective: " + player1Unit.getObjectiveUnit().getId());
+
                     int posY = 1080 - size - player1Unit.getGroup().getY();
                     player.sendInputLine(player1Unit.getId() + " " + player1Unit.getGroup().getX() + " " + posY + " " + player1Unit.getFaceDirection().ordinal() + " " + player1Unit.getLife() + " " + player1Unit.getType().ordinal() + " " + moving + " " + player1Unit.getNextX() + " " + (1080 - size - player1Unit.getNextY()));
                 } else {
@@ -1937,6 +1953,7 @@ public class Referee extends AbstractReferee {
 
             if (player0Units[i] != null) { //Si la unidad aun existia
                 if (player0Units[i].getLife() <= 0) { //Si ha muerto
+                    player0Units[i].setObjectiveUnit(null);
                     for (Unit player1Unit : player1Units) { //Todas las unidades que le estaban haciendo objetivo le dejan de hacerlo
                         if (player1Unit != null && player1Unit.getObjectiveUnit() == player0Units[i]) {
                             player1Unit.setObjectiveUnit(null);
@@ -1963,6 +1980,7 @@ public class Referee extends AbstractReferee {
             }
             if (player1Units[i] != null) {
                 if (player1Units[i].getLife() <= 0) {
+                    player1Units[i].setObjectiveUnit(null);
                     for (Unit player0Unit : player0Units) {
                         if (player0Unit != null && player0Unit.getObjectiveUnit() == player1Units[i]) {
                             player0Unit.setObjectiveUnit(null);
