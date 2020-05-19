@@ -33,51 +33,276 @@
             <span class="icon icon-rules">&nbsp;</span>
             <span>Rules</span>
         </h2>
-        <div><div class="statement-rules-content"><p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">This is a 1 vs 1 game, when both players have the same amount of units and they have to use strategy to defeat the other player destroying all his/her units.</span></p>
-            <p>
-                <br>
-            </p>
-            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">In each turn, the player could send one troop to the position that his/her wants, to do this you will have to indicate the unit <var>id</var>, how many points it would move in the <var>x axis</var> and how many points it would move in the <var>y axis</var>.&nbsp;</span></p>
-            <p>
-                <br>
-            </p>
-            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">All the units have four states (adding one more to the archers), they are the idle position (when they aren’t doing anything), moving, fighting and death (when the unit has been destroyed), the archer have the fire position, when they are attacking to other units with their bows.</span></p>
-            <p>
-                <br>
-            </p>
-            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">The units have a direction too, this is what direction are they looking at, this are <var>NORTHWEST</var> (0), <var>NORTH</var> (1), <var>NORTHEAST</var> (2), <var>EAST</var> (3), <var>SOUTHEAST</var> (4), <var>SOUTH</var> (5), <var>SOUTHWEST</var> (6) and <var>WEST</var> (7).</span></p>
-            <p>
-                <br>
-            </p>
-            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">There are four types of units, these are soldiers with swords, spearmans, archers and cavalry. This follows a “Rock paper scissors” scheme, where the sword beats the spear, the spear beats the horse and the horse beats the sword. The archer can attack at units that are at a distance less than 200 points from their position, but are very weak at hand-to-hand combat.</span></p>
-            <p>
-                <br>
-            </p>
-            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">The game is divided into three leagues, adding complexity when the leagues advance, each leagues has more units in each side that the last one. The first league will have four units: a swordsman, a spearman, an archer and a cavalry; the second one will have nine units, which uses a draft system, where each player will select one unit each turn until there are nine units on each side of the map (how it works it will be explained later); and the third one will have thirty units on each side with a draft system, but it adds the general units, this units are a bit stronger than the other ones and can change the ally units stats depending of his status and position (it will be explained later).</span></p>
-            <p>
-                <br>
-            </p>
-            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">The draft is a troops selector, where you can choose between the four types of troops and you can indicate where you want to put your different type of units selecting their initial x and y position (for example “2(id) 200(x) 500(y)”). The selector is:</span></p>
-            <p>
-                <br>
-            </p>
-            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">1. Soldiers with swords.</span></p>
-            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">2. Soldiers with spears.</span></p>
-            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">3. Cavalry.</span></p>
-            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">4. Archers.</span></p>
-            <p>
-                <br>
-            </p>
-            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">The general is a special unit that (in the third league) always would be the unit that has id 1 in your army. This unit have an amount of 1.25 in his stats permanently and increment all the ally units stats that are near to him, but if the general dies, all your units would receive a stats penalization that would decrease their stats in 0.75. All the stats can change, except for the life one, that it isn’t affected by these changes.</span></p>
-            <p>
-                <br>
-            </p>
-            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">There are different types of stats, and each unit has different amount of them, the stats are: life, defense, attack, charge resistance, charge force, speed and resistance from far attacks, in addition, the archers have two more stats, these ones are how far they can throw arrows and how damage they do with these arrows.</span></p>
-            <p>
-                <br>
-            </p>
-            <p dir="ltr" style="line-height:1.38;text-align: justify;margin-top:0pt;margin-bottom:0pt;"><span style="font-size:11pt;font-family:Arial;color:#FFFFFF;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">The game finish when one army is completely destroy or when 400 turns finish, in these last case, the winner would be the player who has more units alive at that moment, being a draw if both players have the same amount of units.</span></p>
-        </div>
+        <div><div class="statement-rules-content"><p><span>TotalBotWar is a 1 vs 1, pseudo-real-time, multi-action game, partially inspired in the real-time battles of the Total War games series (</span><a href="https://www.totalwar.com/"><span>https://www.totalwar.com/</span></a><span>). In our game, both players start with the same number of military units and they have to use strategies to defeat the other player destroying the most of his/her units. The winner is the player who first destroys all the opponent&rsquo;s units or the one with more units alive on the battlefield when the maximum number of turns is reached. The maximum number of turns is 400.</span></p>
+            <p><br></p>
+            <p><span>The battlefield has 1920 columns and 1080 rows.</span></p>
+            <p><br></p>
+            <p><span>In each turn, the player can perform an action for each own unit.&nbsp;</span><span>To play actions for a death unit is not illegal, but it has not to effect.&nbsp;</span><span>An action consists of moving a unit a particular number of pixels in both directions. The movement can take several turns to be completed. If in a turn, the player does not indicate an action for a particular unit, it continues moving following the previous action performed on this unit.</span></p>
+            <p><br></p>
+            <p><span>An action has the following format:&nbsp;</span><span>UnitID DeltaX DeltaY</span><span>, where:</span></p>
+            <p><br></p>
+            <ul>
+                <li>
+                    <span>Unit ID</span><span>&nbsp;</span><span>is the unique ID of the unit.</span>
+                </li>
+                <li>
+                    <span>DeltaX</span><span>&nbsp;is the number of pixels we want to move the troop on the X axis.</span>
+                </li>
+                <li>
+                    <span>DeltaY</span><span>&nbsp; is the number of pixels we want to move the troop on the Y axis.</span>
+                </li>
+            </ul>
+            <p><br></p>
+            <p><span>The final target coordinates of the unit is calculated as the sum of the actual coordinates of the unit and the shift specified at&nbsp;</span><span>[DeltaX, DeltaY]</span><span>.</span></p>
+            <p><br></p>
+            <p><span>For instance, some actions that can be played are:</span></p>
+            <p><br></p>
+            <ul>
+                <li>
+                    <span>1 100 50</span><span>: Unit 1 will move 100 pixels to the right and 50 to the top of the battlefield.</span>
+                </li>
+                <li>
+                    <span>3 -100 -10</span><span>: Unit 3 will move 100 pixels to the left and 10 to the bottom of the battlefield.</span>
+                </li>
+                <li>
+                    <span>5 &nbsp;0 &nbsp;0</span><span>: Unit 5 will stop.</span>
+                </li>
+            </ul>
+            <p><br></p>
+            <p><span>Note that&nbsp;</span><span>DeltaX&nbsp;</span><span>and&nbsp;</span><span>DeltaY&nbsp;</span><span>are not the global coordinates where we want to move the unit. Unlike, they are how many pixels we want to move the unit concerning the actual coordinates of the unit.</span></p>
+            <p><br></p>
+            <p><span>Also note that it is assumed that the player army is always the one located in the bottom area of the battlefield whereas the opponent&rsquo;s army is the one located on top one.&nbsp;</span></p>
+            <p><br></p>
+            <p><span>In each turn, the player can perform more than one action. They must be separated by a semicolon. For instance, to perform the three previously showed actions in the same turn, the player must provide the following multi-action:&nbsp;</span><span>&ldquo;1 100 50; 3 -100 -10; 5 0 0&rdquo;</span><span>.</span></p>
+            <p><br></p>
+            <p><span>The input from the system provides information about the player&rsquo;s units and opponent&rsquo;s ones. First, the system provides the total number of units for each player&rsquo;s unit. Then, the system provides the following information for each unit, first for player&rsquo;s ones and after the opponent&rsquo;s ones:</span></p>
+            <p><br></p>
+            <ul>
+                <li>
+                    <span>ID</span><span>: Unique id of the unit.</span></p>
+                </li>
+                <li>
+                    <span>Location</span><span>: X, Y coordinates indicating the actual position of the unit on the battlefield.</span>
+                </li>
+                <li>
+                    <span>Direction</span><span>: A number indicating where the unit is looking for. It can be NORTHWEST (0), NORTH (1), NORTHEAST (2), EAST (3), SOUTHEAST (4), SOUTH (5), SOUTHWEST (6) and WEST (7).</span>
+                </li>
+                <li>
+                    <span>Life</span><span>: Amount of life points. The unit is death when its life reaches 0.</span>
+                </li>
+                <li>
+                    <span>Type</span><span>: Unit type. It can be: soldiers with swords (0), spearman (1), cavalry (2) or archers (3).</span>
+                </li>
+                <li>
+                    <span>Moving</span><span>: The unit is not moving (1) or it is moving (0).</span>
+                </li>
+                <li>
+                    <span>Target</span><span>: Location where the unit is going to stop.</span>
+                </li>
+            </ul>
+            <p><span>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></p>
+            <p><span>For opponent&rsquo;s units, the system does not provide the target.&nbsp;</span></p>
+            <p><br></p>
+            <p>Note that both players have always the same number of units.&nbsp;</span></p>
+            <p><br></p>
+            <p><span>A unit can be idle (not doing anything), moving, fighting or death. Archers can also be throwing arrows.</span></p>
+            <p><br></p>
+            <p><span>A unit continues moving until it collides with an opponent or the limit of the battlefield is reached. On the first case, both stop and start to fight one versus the other. The result of the fight depends on the stats of each unit. When a unit gets 0 life points, it is considered as death. On the second case, the unit stops. When two units collide, the charging unit will do more damage if them attack from behind the enemy unit.</span></p>
+            <p><br></p>
+            <p><span>Unit combat follows a &ldquo;Rock paper scissors&rdquo; scheme, where the sword beats the spear, the spear beats the horse and the horse beats the sword. The archer attacks units that are at a distance less than&nbsp;</span><span>450&nbsp;</span><span>points from their position, but are very weak at hand-to-hand combat. Friend units can also be damaged by friend arrows if they are fighting versus an opponent unit that it is receiving arrows. Archers always attack to the opponent unit with the smallest&nbsp;</span><span>UnitId&nbsp;</span><span>inside the attacking range.</span></p>
+            <p><br></p>
+            <p><span>The game is divided into three leagues, adding complexity when the leagues advance.&nbsp;</span></p>
+            <p><br></p>
+            <p><span>The first league has just four units: a swordsman, a spearman, an archer and a cavalry.&nbsp;</span></p>
+            <p><br></p>
+            <p><span>The second one has&nbsp;</span><span>9</span><span>&nbsp;different units. The first 9 turns are the draft, where the player selects, at each turn, one unit to be used and the absolute position to locate it in the battlefield. There is no restrictions in the army configuration. For instance, the player can select 9 archer units if he/she wants. To tell the system which unit we want to use, an action can be used with the following format:&nbsp;</span></p>
+            <p><br></p>
+            <p><span>&ldquo;TYPE X Y&rdquo;</span></p>
+            <p><br></p>
+            <p><span>where,&nbsp;</span><span>TYPE&nbsp;</span><span>is the type of unit to be used: Soldiers with swords (0), spearman (1), cavalry (2) or archers (3), and&nbsp;</span><span>X</span><span>&nbsp;and&nbsp;</span><span>Y</span><span>&nbsp;are the absolute coordinates where the unit will be deployed on the battlefield.</span></p>
+            <p><br></p>
+            <p><span>Two units can not be located at the same area. If the player try to locate an unit in an already occupied area, the system try to locate it in the neighbour area of the existing one.</span></p>
+            <p><br></p>
+            <p><span>The third league introduces the figure of the&nbsp;</span><span>general&nbsp;</span><span>and admit&nbsp;</span><span>30</span><span>&nbsp;units. The first 30 turns are for the draft. A general is a special unit that can be used to improve the stats (by&nbsp;</span><span>1.25</span><span>) of the units close to it (close means into a radius of&nbsp;</span><span>300&nbsp;</span><span>pixels). But, if the general is dead, all the units of the army will be decreased their stats (by&nbsp;</span><span>0.75</span><span>). The general is always the first unit specified in the draft.&nbsp;</span></p>
+            <p><br></p>
+            <p><span>Each unit has associated a stat vector which models its behaviour. The components of the stats vector are: life, defence, attack, charge resistance, charge force, speed and resistance from far attacks. In addition, the archers have two more stats: how far they can throw arrows and how damage they do with these arrows.</span></p>
+            <p><br></p>
+            <p><span>By default, this stats are as follows for each unit type:</span></p>
+            <p><br></p>
+            <div>
+                <table>
+                    <tbody>
+                    <tr>
+                        <td><br></td>
+                        <td>
+                            <p><span>Sword</span></p>
+                        </td>
+                        <td>
+                            <p><span>Spears</span></p>
+                        </td>
+                        <td>
+                            <p><span>Calvary</span></p>
+                        </td>
+                        <td>
+                            <p><span>Archer</span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><span>Life</span></p>
+                        </td>
+                        <td>
+                            <p><span>250</span></p>
+                        </td>
+                        <td>
+                            <p><span>250</span></p>
+                        </td>
+                        <td>
+                            <p><span>200</span></p>
+                        </td>
+                        <td>
+                            <p><span>100</span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><span>Defence</span></p>
+                        </td>
+                        <td>
+                            <p><span>10</span></p>
+                        </td>
+                        <td>
+                            <p><span>20</span></p>
+                        </td>
+                        <td>
+                            <p><span>12</span></p>
+                        </td>
+                        <td>
+                            <p><span>5</span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><span>Attack</span></p>
+                        </td>
+                        <td>
+                            <p><span>20</span></p>
+                        </td>
+                        <td>
+                            <p><span>15</span></p>
+                        </td>
+                        <td>
+                            <p><span>12</span></p>
+                        </td>
+                        <td>
+                            <p><span>10</span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><span>Charge resistance</span></p>
+                        </td>
+                        <td>
+                            <p><span>25</span></p>
+                        </td>
+                        <td>
+                            <p><span>125</span></p>
+                        </td>
+                        <td>
+                            <p><span>15</span></p>
+                        </td>
+                        <td>
+                            <p><span>0</span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><span>Charge force</span></p>
+                        </td>
+                        <td>
+                            <p><span>5</span></p>
+                        </td>
+                        <td>
+                            <p><span>10</span></p>
+                        </td>
+                        <td>
+                            <p><span>100</span></p>
+                        </td>
+                        <td>
+                            <p><span>5</span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><span>Speed</span></p>
+                        </td>
+                        <td>
+                            <p><span>15</span></p>
+                        </td>
+                        <td>
+                            <p><span>10</span></p>
+                        </td>
+                        <td>
+                            <p><span>40</span></p>
+                        </td>
+                        <td>
+                            <p><span>15</span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><span>Resistance from far attacks</span></p>
+                        </td>
+                        <td>
+                            <p><span>10</span></p>
+                        </td>
+                        <td>
+                            <p><span>30</span></p>
+                        </td>
+                        <td>
+                            <p><span>30</span></p>
+                        </td>
+                        <td>
+                            <p><span>10</span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><span>Arrow distance</span></p>
+                        </td>
+                        <td>
+                            <p><span>-</span></p>
+                        </td>
+                        <td>
+                            <p><span>-</span></p>
+                        </td>
+                        <td>
+                            <p><span>-</span></p>
+                        </td>
+                        <td>
+                            <p><span>450</span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><span>Arrow damage</span></p>
+                        </td>
+                        <td>
+                            <p><span>-</span></p>
+                        </td>
+                        <td>
+                            <p><span>-</span></p>
+                        </td>
+                        <td>
+                            <p><span>-</span></p>
+                        </td>
+                        <td>
+                            <p><span>20</span></p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>        </div>
         </div>
         <!-- PROTOCOL -->
         <div class="statement-section statement-protocol">
@@ -89,18 +314,22 @@
             <div class="blk">
                 <div class="title">Input for one game turn</div>
                 <div class="text"><span class="statement-lineno">First input:</span> 1 integer <var>numberUnits</var> (how many troops are on each side at the beginning).<br>
-                    <span class="statement-lineno">Second input:</span> 1 integer <var>allyUnitId</var>.<br>
-                    <span class="statement-lineno">Third input:</span> 1 integer <var>allyUnitPosX</var>.<br>
-                    <span class="statement-lineno">Fourth input:</span> 1 integer <var>allyUnitPosY</var>.<br>
-                    <span class="statement-lineno">Fifth input:</span> 1 integer <var>allyUnitDirection</var>.<br>
-                    <span class="statement-lineno">Sixth input:</span> 1 integer <var>allyUnitLife</var>.<br>
-                    <span class="statement-lineno">Seventh input:</span> 1 integer <var>allyUnitType</var>.<br>
-                    <span class="statement-lineno">Eight input:</span> 1 integer <var>enemyUnitId</var>.<br>
-                    <span class="statement-lineno">Nineth input:</span> 1 integer <var>enemyUnitPosX</var>.<br>
-                    <span class="statement-lineno">Tenth input:</span> 1 integer <var>enemyUnitPosY</var>.<br>
-                    <span class="statement-lineno">Eleventh input:</span> 1 integer <var>enemyUnitDirection</var>.<br>
-                    <span class="statement-lineno">Twelfth input:</span> 1 integer <var>enemyUnitLife</var>.<br>
-                    <span class="statement-lineno">Thirteenth input:</span> 1 integer <var>enemyUnitType</var>.<br>
+                    <span class="statement-lineno">Second input:</span> 1 integer <var>allyUnitId</var> (the unit identifier).<br>
+                    <span class="statement-lineno">Third input:</span> 1 integer <var>allyUnitPosX</var> (the unit's X position).<br>
+                    <span class="statement-lineno">Fourth input:</span> 1 integer <var>allyUnitPosY</var> (the unit's Y position).<br>
+                    <span class="statement-lineno">Fifth input:</span> 1 integer <var>allyUnitDirection</var> (where direction the unit is looking at).<br>
+                    <span class="statement-lineno">Sixth input:</span> 1 integer <var>allyUnitLife</var> (the unit's life).<br>
+                    <span class="statement-lineno">Seventh input:</span> 1 integer <var>allyUnitType</var> (which kind of troop is this unit).<br>
+                    <span class="statement-lineno">Eight input:</span> 1 integer <var>allyUnitMoving</var> (indicates if the unit is moving (1) or not (0)).<br>
+                    <span class="statement-lineno">Nineth input:</span> 1 integer <var>allyUnitFinalXPosition</var> (where the unit is going in the X axis).<br>
+                    <span class="statement-lineno">Tenth input:</span> 1 integer <var>allyUnitFinalYPosition</var> (where the unit is going in the Y axis).<br>
+                    <span class="statement-lineno">Eleventh input:</span> 1 integer <var>enemyUnitId</var> (the unit identifier).<br>
+                    <span class="statement-lineno">Twelfth input:</span> 1 integer <var>enemyUnitPosX</var> (the unit's X position).<br>
+                    <span class="statement-lineno">Thirteenth input:</span> 1 integer <var>enemyUnitPosY</var> (the unit's Y position).<br>
+                    <span class="statement-lineno">Fourteenth input:</span> 1 integer <var>enemyUnitDirection</var> (where direction the unit is looking at).<br>
+                    <span class="statement-lineno">Fifteenth input:</span> 1 integer <var>enemyUnitLife</var> (the unit's life).<br>
+                    <span class="statement-lineno">Sixteenth input:</span> 1 integer <var>enemyUnitType</var> (which kind of troop is this unit).<br>
+                    <span class="statement-lineno">Seventeenth input:</span> 1 integer <var>enemyUnitMoving</var> (indicates if the unit is moving (1) or not (0)).<br>
                 </div>
 
                 <!-- Protocol block -->

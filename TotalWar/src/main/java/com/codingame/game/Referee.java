@@ -61,6 +61,7 @@ public class Referee extends AbstractReferee {
         drawUnits();
         drawHud();
 
+        gameManager.setTurnMaxTime(50);
         gameManager.setFrameDuration(600);
         gameManager.getPlayer(0).setScore(1);
         gameManager.getPlayer(1).setScore(1);
@@ -94,7 +95,7 @@ public class Referee extends AbstractReferee {
                     .setAnchor(0);
         } else {
             graphicEntityModule.createSprite()
-                    .setImage("Background.png")
+                    .setImage("Fondo3.jpg")
                     .setBaseHeight(1080)
                     .setBaseWidth(1920)
                     .setAnchor(0);
@@ -1070,7 +1071,7 @@ public class Referee extends AbstractReferee {
 
         //A partir del segundo turno de juego se reduce la duración de cada turno
         if (n == numberUnits + 1) {
-            gameManager.frameDuration = 200;
+            gameManager.setTurnMaxTime(75);
             n++;
         }
 
@@ -1081,7 +1082,7 @@ public class Referee extends AbstractReferee {
                 horse.setAlpha(0);
                 bow.setAlpha(0);
             }
-            gameManager.frameDuration = 1000; //Establecer la duración del prierm turno
+            gameManager.setTurnMaxTime(100); //Establecer la duración del prierm turno
             if (gameManager.getLeagueLevel() != 1 && !player0Units[0].getBuffed() && !player1Units[0].getBuffed()) { //Aumentar los stats a los generales
                 player0Units[0].changeStats(1.25f);
                 player0Units[0].setBuffed(true);
@@ -1121,7 +1122,7 @@ public class Referee extends AbstractReferee {
                             }
 
                             //Establece la posición a la que se va a dirigir
-                            player0Units[Action.id - 1].setNextX(player0Units[Action.id - 1].getGroup().getX() + Action.x);
+                            player0Units[Action.id - 1].setNextX(player0Units[Action.id - 1].getGroup().getX() - Action.x);
                             if (player0Units[Action.id - 1].getNextX() < 0)
                                 player0Units[Action.id - 1].setNextX(0);
                             else if (player0Units[Action.id - 1].getNextX() > (1920 - size))
@@ -1146,7 +1147,7 @@ public class Referee extends AbstractReferee {
                             } else {
                                 player1Units[Action.id - 1].setSpriteAnimation(1, "Left");
                             }
-                            player1Units[Action.id - 1].setNextX(player1Units[Action.id - 1].getGroup().getX() - Action.x);
+                            player1Units[Action.id - 1].setNextX(player1Units[Action.id - 1].getGroup().getX() + Action.x);
                             if (player1Units[Action.id - 1].getNextX() < 0)
                                 player1Units[Action.id - 1].setNextX(0);
                             else if (player1Units[Action.id - 1].getNextX() > (1920 - size))
@@ -1184,21 +1185,21 @@ public class Referee extends AbstractReferee {
                 Group group;
 
                 //Lee e inicia que tipo de unidad a elegido el jugador
-                if (Action.id == 1 || Action.id == 0) {
+                if (Action.id == 0) {
                     player1Units[n] = new Unit(n + 1, Type.SWORD, null, null, null, Soldado_Left, Soldado_Right, null, null, Direction.NORTH, null, null);
                     setupAnimations(player1Units[n], 1);
                     sword.setAlpha(1);
                     spear.setAlpha(0.3);
                     bow.setAlpha(0.3);
                     horse.setAlpha(0.3);
-                } else if (Action.id == 2) {
+                } else if (Action.id == 1) {
                     player1Units[n] = new Unit(n + 1, Type.SPEAR, null, null, null, Lancero_Left, Lancero_Right, null, null, Direction.NORTH, null, null);
                     setupAnimations(player1Units[n], 1);
                     sword.setAlpha(0.3);
                     spear.setAlpha(1);
                     bow.setAlpha(0.3);
                     horse.setAlpha(0.3);
-                } else if (Action.id == 3) {
+                } else if (Action.id == 2) {
                     player1Units[n] = new Unit(n + 1, Type.HORSE, null, null, null, Caballero_Left, Caballero_Right, null, null, Direction.NORTH, null, null);
                     setupAnimations(player1Units[n], 1);
                     sword.setAlpha(0.3);
@@ -1346,21 +1347,21 @@ public class Referee extends AbstractReferee {
             } else if (n < numberUnits && gameManager.getLeagueLevel() != 1 && player.getIndex() == 0) { //Lo mismo que en para el otro jugador pero simetrico
                 Group group;
 
-                if (Action.id == 1 || Action.id == 0) {
+                if (Action.id == 0) {
                     player0Units[n] = new Unit(n + 1, Type.SWORD, null, null, null, Soldado_Left, Soldado_Right, null, null, Direction.NORTH, null, null);
                     setupAnimations(player0Units[n], 0);
                     sword.setAlpha(1);
                     spear.setAlpha(0.3);
                     bow.setAlpha(0.3);
                     horse.setAlpha(0.3);
-                } else if (Action.id == 2) {
+                } else if (Action.id == 1) {
                     player0Units[n] = new Unit(n + 1, Type.SPEAR, null, null, null, Lancero_Left, Lancero_Right, null, null, Direction.NORTH, null, null);
                     setupAnimations(player0Units[n], 0);
                     sword.setAlpha(0.3);
                     spear.setAlpha(1);
                     bow.setAlpha(0.3);
                     horse.setAlpha(0.3);
-                } else if (Action.id == 3) {
+                } else if (Action.id == 2) {
                     player0Units[n] = new Unit(n + 1, Type.HORSE, null, null, null, Caballero_Left, Caballero_Right, null, null, Direction.NORTH, null, null);
                     setupAnimations(player0Units[n], 0);
                     sword.setAlpha(0.3);
@@ -2021,7 +2022,7 @@ public class Referee extends AbstractReferee {
         if (dead)
             gameManager.getPlayer(1).setScore(0); //El jugador 1 ha muerto
 
-        if (gameManager.getPlayer(0).getScore() == 0 || gameManager.getPlayer(1).getScore() == 0 || turn == 400) { //Si alguno de los dos jugadores ha muerto o se ha superado el límite máximo de turnos
+        if (gameManager.getPlayer(0).getScore() == 0 || gameManager.getPlayer(1).getScore() == 0 || turn == 200) { //Si alguno de los dos jugadores ha muerto o se ha superado el límite máximo de turnos
             endGame();
         }
     }

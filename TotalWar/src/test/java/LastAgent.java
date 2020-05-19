@@ -1,6 +1,7 @@
+import java.util.Random;
 import java.util.Scanner;
 
-public class AgentAI {
+public class LastAgent {
     static int numberUnits;
 
     static class Unit {
@@ -55,14 +56,20 @@ public class AgentAI {
         }
     }
 
+    static heuristicValue[] unitsValues;
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         numberUnits = in.nextInt();
         int turn = 0;
         int draftHorses = 0;
 
+        unitsValues = new heuristicValue[numberUnits + 1];
+
         while (true) {
             Unit[] allyUnits = new Unit[numberUnits + 1];
+
+            int iteraciones = 0;
 
             for (int i = + 1; i < numberUnits + 1; i++) {
                 int allyUnitId = in.nextInt();
@@ -108,10 +115,14 @@ public class AgentAI {
                 turn = numberUnits;
 
             if (turn >= numberUnits) {
+
+                float maxHeuristic, auxHeuristic = 0, actualHeuristic = 0;
+                long TInicio, TFin, tiempo;
+
+                TInicio = System.currentTimeMillis();
+
                 heuristicValue maxValue = new heuristicValue(null, null, 0);
                 heuristicValue newValue = null;
-
-                heuristicValue[] unitsValues = new heuristicValue[allyUnits.length];
 
                 for (int i = 0; i < allyUnits.length; i++) {
                     if (allyUnits[i] != null) {
@@ -120,13 +131,70 @@ public class AgentAI {
                             maxValue = newValue;
                     }
 
-                    if (maxValue.ally != null)
+                    if (maxValue.ally != null) {
                         unitsValues[i] = maxValue;
-                    else
+                        auxHeuristic += maxValue.value;
+                    } else
                         unitsValues[i] = null;
 
                     maxValue = new heuristicValue(null, null, 0);
                 }
+
+                maxHeuristic = auxHeuristic;
+                TFin = System.currentTimeMillis();
+
+                /*System.err.print("Iteracion: " + iteraciones + " Target: [");
+                for (int i = 1; i < unitsValues.length; i++) {
+                    if (unitsValues[i] != null)
+                        System.err.print(unitsValues[i].enemy.id + " ");
+                }
+                System.err.println("] Value: " + maxHeuristic);*/
+
+                while (TFin - TInicio < 2) {
+                    Random r = new Random();
+                    int randomUnit = r.nextInt(allyUnits.length - 1) + 1; //Ya que el 0 no tiene nada
+                    int randomEnemyUnit = r.nextInt(allyUnits.length - 1) + 1; //Ya que el 0 no tiene nada
+                    if (allyUnits[randomUnit] != null) {
+                        actualHeuristic = maxHeuristic - unitsValues[randomUnit].value;
+
+                        /*System.err.print("Iteracion: " + iteraciones + " Target: [");
+                        for (int i = 1; i < unitsValues.length; i++) {
+                            if (unitsValues[i] != null)
+                                System.err.print(unitsValues[i].enemy.id + " ");
+                        }
+                        System.err.print("] Value: " + maxHeuristic);*/
+
+                        heuristicValue heu = new heuristicValue(allyUnits[randomUnit], enemyUnits[randomEnemyUnit], 0);
+                        heu.value = calculateUnicHeuristic(allyUnits[randomUnit], enemyUnits[randomEnemyUnit], allyUnits, enemyUnits);
+                        actualHeuristic += heu.value;
+
+                        /*System.err.print(" Target: [");
+                        for (int i = 1; i < unitsValues.length; i++) {
+                            if (unitsValues[i] != null) {
+                                if (i != randomUnit) {
+                                    System.err.print(unitsValues[i].enemy.id + " ");
+                                } else if (heu.enemy != null) {
+                                    System.err.print(heu.enemy.id + " ");
+                                }
+                            }
+                        }
+                        System.err.println("] Value: " + actualHeuristic);*/
+
+                        if (actualHeuristic >= maxHeuristic) {
+                            maxHeuristic = actualHeuristic;
+                            unitsValues[randomUnit] = heu;
+                        }
+                        iteraciones++;
+                    }
+                    TFin = System.currentTimeMillis();
+                }
+
+                /*for (int i = 1; i < unitsValues.length; i++) {
+                    if (unitsValues[i] != null)
+                        System.err.println("ID: " + unitsValues[i].ally.id + " Enemy: " + unitsValues[i].enemy.id + " Value: " + unitsValues[i].value);
+                }*/
+
+                System.err.println(iteraciones);
 
                 int x, y, id;
                 String finalString = "";
@@ -142,7 +210,7 @@ public class AgentAI {
                             x = finalPos.x;
                             y = finalPos.y;
                         } else {
-                            x = unitsValues[i].enemy.posX - unitsValues[i].ally.posX;
+                            x = unitsValues[i].enemy.posX - unitsValues[i].ally.posX ;
                             y = unitsValues[i].enemy.posY - unitsValues[i].ally.posY;
                         }
 
@@ -232,13 +300,14 @@ public class AgentAI {
                 finalValue += areaEnemyArchersHeuristicValue(ally, enemies[i], enemies);
                 finalValue += directionHeuristicValue(ally, enemies[i], allies);
                 finalValue += distanceHeuristic(ally, enemies[i]);
+                finalValue += sameObjective(ally, enemies[i]);
 
                 if (numberUnits <= 9) {
-                    object.value = finalValue / 5;
+                    object.value = finalValue / 6;
                 } else {
                     if (enemies[i].id == 1)
                         finalValue++;
-                    object.value = finalValue / 6;
+                    object.value = finalValue / 7;
                 }
 
                 heuristics[i] = object;
@@ -251,6 +320,24 @@ public class AgentAI {
         }
 
         return heuristics[maxPosition];
+    }
+
+    private static float calculateUnicHeuristic (Unit ally, Unit enemy, Unit[] allies, Unit[] enemies) {
+        heuristicValue object = new heuristicValue(ally, enemy, 0);
+
+        float finalValue = 0;
+
+        if (enemy != null) {
+            finalValue += typeHeuristicValue(ally, enemy);
+            finalValue += lifeDifferenceHeuristicValue(ally, enemy);
+            finalValue += areaEnemyArchersHeuristicValue(ally, enemy, enemies);
+            finalValue += directionHeuristicValue(ally, enemy, allies);
+            finalValue += distanceHeuristic(ally, enemy);
+            finalValue += sameObjective(ally, enemy);
+
+            return finalValue;
+        } else
+            return 0;
     }
 
     private static float typeHeuristicValue(Unit ally, Unit enemy) {
@@ -443,5 +530,16 @@ public class AgentAI {
         }
 
         return pos;
+    }
+
+    private static float sameObjective(Unit ally, Unit enemy) {
+        for (int i = 0; i < unitsValues.length; i++) {
+            if (unitsValues[i] != null && ally != unitsValues[i].ally) {
+                if (unitsValues[i].enemy == enemy) {
+                    return 1f;
+                }
+            }
+        }
+        return 0;
     }
 }

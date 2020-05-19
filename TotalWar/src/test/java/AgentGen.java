@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class AgentAI {
+public class AgentGen {
     static int numberUnits;
 
     static class Unit {
@@ -59,12 +59,11 @@ public class AgentAI {
         Scanner in = new Scanner(System.in);
         numberUnits = in.nextInt();
         int turn = 0;
-        int draftHorses = 0;
 
         while (true) {
             Unit[] allyUnits = new Unit[numberUnits + 1];
 
-            for (int i = + 1; i < numberUnits + 1; i++) {
+            for (int i = 1; i < numberUnits + 1; i++) {
                 int allyUnitId = in.nextInt();
                 int allyUnitPosX = in.nextInt();
                 int allyUnitPosY = in.nextInt();
@@ -85,6 +84,7 @@ public class AgentAI {
             }
 
             Unit[] enemyUnits = new Unit[numberUnits + 1];
+            Unit[] futureEnemyUnits = new Unit[numberUnits + 1];
 
             for (int i = 1; i < numberUnits + 1; i++) {
                 int enemyUnitId = in.nextInt();
@@ -95,9 +95,10 @@ public class AgentAI {
                 int enemyUnitType = in.nextInt();
                 int enemyUnitMoving = in.nextInt();
 
-                if (enemyUnitId != -1)
+                if (enemyUnitId != -1) {
                     enemyUnits[i] = new Unit(enemyUnitId, enemyUnitPosX, enemyUnitPosY, enemyUnitDirection, enemyUnitLife, enemyUnitType, enemyUnitMoving);
-                else {
+                    futureEnemyUnits[i] = new Unit(enemyUnitId, enemyUnitPosX, enemyUnitPosY, enemyUnitDirection, enemyUnitLife, enemyUnitType, enemyUnitMoving);
+                } else {
                     enemyUnits[i] = null;
                 }
             }
@@ -113,7 +114,7 @@ public class AgentAI {
 
                 heuristicValue[] unitsValues = new heuristicValue[allyUnits.length];
 
-                for (int i = 0; i < allyUnits.length; i++) {
+                for (int i = 1; i < allyUnits.length; i++) {
                     if (allyUnits[i] != null) {
                         newValue = calculateHeuristic(allyUnits[i], allyUnits, enemyUnits);
                         if (newValue.value > maxValue.value)
@@ -128,21 +129,74 @@ public class AgentAI {
                     maxValue = new heuristicValue(null, null, 0);
                 }
 
-                int x, y, id;
+                for (int i = 1; i < numberUnits + 1; i++) {
+                    position pos;
+
+                    if (futureEnemyUnits[i] != null) {
+                        pos = nextEnemyUnitPosition(futureEnemyUnits[i]);
+                        futureEnemyUnits[i].posX = pos.x;
+                        futureEnemyUnits[i].posY = pos.y;
+                    }
+                }
+
+                Unit[] finalUnits = new Unit[numberUnits + 1];
+
+                Unit auxUnit;
+                Unit maxUnit = null;
+                float currentMaxValue = 0f;
+                float newHeuristicValue;
+                String finalString = "";
+                String provisionalString = "";
+
+                for (int i = 0; i < numberUnits + 1; i++) {
+                    if (allyUnits[i] != null) {
+                        for (int vertical = -1; vertical < 2; vertical++) {
+                            for (int horizontal = -1; horizontal < 2; horizontal++) {
+                                auxUnit = futureAllyUnitPos(allyUnits[i], horizontal, vertical);
+                                if (horizontal == 0 && vertical == 0)
+                                    auxUnit.moving = 0;
+                                else
+                                    auxUnit.moving = 1;
+                                newHeuristicValue = calculateGeneticHeuristic(auxUnit, futureEnemyUnits, unitsValues);
+                                if (newHeuristicValue > currentMaxValue) {
+                                    currentMaxValue = newHeuristicValue;
+                                    maxUnit = auxUnit;
+                                    provisionalString = auxUnit.id + " " + horizontal * -1 * 30 + " " + vertical * 30;
+                                    System.err.println(vertical);
+                                }
+                            }
+                        }
+                        finalUnits[i] = maxUnit;
+                        if (maxUnit != null) {
+                            if (finalString != "")
+                                finalString += ";";
+
+                            finalString += provisionalString;
+                        }
+                    }
+                }
+
+                if (finalString == "") {
+                    System.out.println("0 0 0");
+                } else {
+                    System.out.println(finalString);
+                }
+
+                /*int x, y, id;
                 String finalString = "";
 
-                for (int i = 0; i < unitsValues.length; i++) {
-                    if (unitsValues[i] != null) {
+                for (int i = 0; i < finalUnits.length; i++) {
+                    if (finalUnits[i] != null) {
                         if (finalString != "")
                             finalString += "; ";
 
 
-                        if (unitsValues[i].ally.type == 3) {
+                        if (finalUnits[i].type == 3) {
                             position finalPos = archerDistancePosition(unitsValues[i].ally, unitsValues[i].enemy);
                             x = finalPos.x;
                             y = finalPos.y;
                         } else {
-                            x = unitsValues[i].enemy.posX - unitsValues[i].ally.posX;
+                            x = unitsValues[i].ally.posX - unitsValues[i].enemy.posX;
                             y = unitsValues[i].enemy.posY - unitsValues[i].ally.posY;
                         }
 
@@ -156,7 +210,7 @@ public class AgentAI {
                     System.out.println("0 0 0");
                 } else {
                     System.out.println(finalString);
-                }
+                }*/
             } else { //Draft
                 int x = 0, y = 0, type = 0;
                 if (numberUnits == 9 && turn < 2) {
@@ -171,16 +225,6 @@ public class AgentAI {
                     type = selectUnitDraft(allyUnits, enemyUnits, turn);
                     y = 250;
                     if (numberUnits == 9) {
-                        if (type == 2) {
-                            if (draftHorses < 2) {
-                                x = 285;
-                                draftHorses++;
-                            } else {
-                                x = 1335;
-                            }
-                        } else
-                            x = 585;
-                    } else {
                         if (type == 2) {
                             x = 173;
                             y = 150;
@@ -221,7 +265,7 @@ public class AgentAI {
         float maxValue = 0;
         int maxPosition = 0;
 
-        for (int i = 0; i < enemies.length; i++) {
+        for (int i = 1; i < enemies.length; i++) {
             if (enemies[i] != null) {
                 heuristicValue object = new heuristicValue(ally, enemies[i], 0);
 
@@ -332,7 +376,7 @@ public class AgentAI {
     private static float directionHeuristicValue(Unit ally, Unit enemy, Unit[] allies) {
         float value = 0;
 
-        for (int i = 0; i < allies.length; i++) {
+        for (int i = 1; i < allies.length; i++) {
             if (allies[i] != null && allies[i] != ally) {
                 if (isIntersect(enemy, allies[i])) {
                     value += 0.5f;
@@ -364,6 +408,26 @@ public class AgentAI {
         }
         int Bx = unit2.posX;
         int By = unit2.posY;
+        return Bx + Bw > Ax && By + Bh > Ay && Ax + Aw > Bx && Ay + Ah > By;
+    }
+
+    private static boolean isIntersectPositions(position unit1, position unit2) { //Comprueba si dos unidades estan colisionando
+        int Ax = unit1.x;
+        int Ay = unit1.y;
+        int Aw, Ah, Bw, Bh;
+        if (numberUnits <= 9) {
+            Aw = 150;
+            Ah = 150;
+            Bw = 150;
+            Bh = 150;
+        } else {
+            Aw = 75;
+            Ah = 75;
+            Bw = 75;
+            Bh = 75;
+        }
+        int Bx = unit2.x;
+        int By = unit2.y;
         return Bx + Bw > Ax && By + Bh > Ay && Ax + Aw > Bx && Ay + Ah > By;
     }
 
@@ -435,13 +499,149 @@ public class AgentAI {
     private static position archerDistancePosition(Unit ally, Unit enemy) {
         position pos = new position(0, 0);
         if (calculateDistance(ally, enemy) > 450) {
-            pos.x = enemy.posX - ally.posX;
+            pos.x = ally.posX - enemy.posX;
             pos.y = enemy.posY - ally.posY;
         } else if (calculateDistance(ally,enemy) < 150) {
-            pos.x = ally.posX - enemy.posX;
+            pos.x = -(ally.posX - enemy.posX);
             pos.y = -(enemy.posY - ally.posY);
         }
 
         return pos;
+    }
+
+    private static position nextEnemyUnitPosition(Unit enemy) {
+        position newPosition = new position(enemy.posX, enemy.posY);
+
+        int speed;
+
+        if (enemy.type == 1) {
+            speed = 10;
+        } else if (enemy.type == 2) {
+            speed = 40;
+        } else {
+            speed = 15;
+        }
+
+        if (enemy.moving == 1) {
+            if (enemy.direction == 0) {
+                newPosition.x += speed;
+                newPosition.y += speed;
+            } else if (enemy.direction == 1) {
+                newPosition.y += speed;
+            } else if (enemy.direction == 2) {
+                newPosition.x -= speed;
+                newPosition.y += speed;
+            } else if (enemy.direction == 3) {
+                newPosition.x -= speed;
+            } else if (enemy.direction == 4) {
+                newPosition.x -= speed;
+                newPosition.y -= speed;
+            } else if (enemy.direction == 5) {
+                newPosition.y -= speed;
+            } else if (enemy.direction == 6) {
+                newPosition.x += speed;
+                newPosition.y -= speed;
+            } else if (enemy.direction == 7) {
+                newPosition.x += speed;
+            }
+        }
+
+        return newPosition;
+    }
+
+    private static float calculateGeneticHeuristic(Unit ally, Unit[] futureEnemies, heuristicValue[] values) {
+        float total = 0;
+        boolean follow = false;
+
+        if (ally.type != 3) {
+            //Parte de encontrarse con un enemigo por el medio
+            for (int i = 1; i < futureEnemies.length; i++) {
+                if (futureEnemies[i] != null) {
+                    if (isIntersect(ally, futureEnemies[i])) {
+                        if (futureEnemies[i].type == 3) {
+                            total++;
+                        } else if (ally.type == 2 && futureEnemies[i].type == 2) {
+                            total += 0.25f;
+                        } else if (ally.type == 2 && futureEnemies[i].type == 0) {
+                            total++;
+                        } else if (ally.type == 1 && futureEnemies[i].type == 1) {
+                            total += 0.25f;
+                        } else if (ally.type == 1 && futureEnemies[i].type == 2) {
+                            total++;
+                        } else if (ally.type == 0 && futureEnemies[i].type == 0) {
+                            total += 0.25f;
+                        } else if (ally.type == 0 && futureEnemies[i].type == 1) {
+                            total++;
+                        }
+
+                        if (follow == false) {
+                            follow = true;
+                            if (numberUnits == 30 && i == 1)
+                                total++;
+                        } else {
+                            total -= 2;
+                        }
+                    } else {
+                        total += 0.5f;
+                    }
+                }
+            }
+        } else {
+            for (int i = 0; i < futureEnemies.length; i++) {
+                if (futureEnemies[i] != null) {
+                    if (isIntersect(ally, futureEnemies[i])) {
+                        total--;
+                    }
+                }
+            }
+
+            if (total >= 0) {
+                for (int i = 0; i < futureEnemies.length; i++) {
+                    if (futureEnemies[i] != null) {
+                        if (distanceHeuristic(ally, futureEnemies[i]) < 450) {
+                            total++;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        double dist = calculateDistance(ally, values[ally.id].enemy);
+
+        dist = dist/1000;
+        dist =  1 - dist;
+
+        total += dist*2;
+
+        return total;
+    }
+
+    private static Unit futureAllyUnitPos(Unit ally, int horizontal, int vertical) {
+        int speed;
+
+        if (ally.type == 1) {
+            speed = 10;
+        } else if (ally.type == 2) {
+            speed = 40;
+        } else {
+            speed = 15;
+        }
+
+        Unit newUnit = ally;
+
+        if (horizontal == -1) {
+            newUnit.posX -= speed;
+        } else if (horizontal == 1) {
+            newUnit.posX += speed;
+        }
+
+        if (vertical == -1) {
+            newUnit.posY -= speed;
+        } else if (vertical == 1) {
+            newUnit.posY += speed;
+        }
+
+        return  newUnit;
     }
 }

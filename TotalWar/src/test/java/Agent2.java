@@ -78,7 +78,7 @@ public class Agent2 {
             int int_random_y = rand.nextInt(2160) - 1080;
 
             if (numberUnits == 4) {
-                System.out.println(int_random_unit + " " + int_random_x + " " + int_random_y);
+                //System.out.println(int_random_unit + " " + int_random_x + " " + int_random_y);
                 /*if (n == 0) {
                     System.out.println("1 0 400 ; 2 0 400 ; 3 0 700; 4 0 200");
                     n++;
@@ -96,11 +96,11 @@ public class Agent2 {
                         System.out.println("3 5000 0");
                         n++;
                     } else {*/
-                    //System.out.println("0 0 0");
+                    System.out.println("0 0 0");
                     //}
                 //}
             } else if (draft && numberUnits == 9) {
-                if (n < 9) {
+               /*if (n < 9) {
                     n++;
                     int int_random_draft = rand.nextInt(4) + 1;
                     int_random_x = rand.nextInt(1920);
@@ -164,11 +164,11 @@ public class Agent2 {
                 } else if (n == 17) {
                     System.out.println("9 0 250");
                     n++;
-                }else {
-                    System.out.println("0 0 0");*/
+                }else {*/
+                    System.out.println("0 0 0");
                 //}
             } else if (numberUnits == 30) {
-                if (n < 30) {
+                /*if (n < 30) {
                     n++;
                     int int_random_draft = rand.nextInt(4) + 1;
                     int_random_x = rand.nextInt(1920);
@@ -359,9 +359,9 @@ public class Agent2 {
                 } else if (n == 59) {
                     System.out.println("30 0 300");
                     n++;
-                } else {
+                } else {*/
                     System.out.println("0 0 0");
-                }*/
+                //}
             }
         }
     }
